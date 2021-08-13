@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="IE=edge"
+    >
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+    <title>EPIC Form</title>
+
+    <!-- Roboto Font -- can replace your font here
+         Be sure to change the CSS selector "has-text-primary"
+     -->
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    >
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    >
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    >
+
+    <!-- https://bulma.io for Bulma docs -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    >
+
+    <!-- Included custom CSS file -->
+    <link
+      rel="stylesheet"
+      href="/css/lead-capture-form.css"
+    >
+
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title has-text-primary is-family-primary">
+          Contact Information
+        </h1>
+        <form onsubmit="return createZIFLead();">
+          <div class="field">
+            <label
+              for="FirstName"
+              class="label is-family-primary"
+            >First Name</label>
+            <div class="control">
+              <input
+                required
+                class="input is-family-primary"
+                id="FirstName"
+                type="text"
+                name="FirstName"
+                placeholder="John"
+              >
+            </div>
+
+          </div>
+
+          <div class="field">
+            <label
+              for="LastName"
+              class="label is-family-primary"
+            >Last Name</label>
+            <div class="control">
+              <input
+                required
+                class="input is-family-primary"
+                id="LastName"
+                type="text"
+                name="LastName"
+                placeholder="Doe"
+              >
+            </div>
+
+          </div>
+
+          <div class="field">
+            <label
+              for="ZipCode"
+              class="label"
+            >Zip code</label>
+            <div class="control">
+              <input
+                required
+                class="input is-family-primary"
+                type="tel"
+                maxlength="5"
+                id="ZipCode"
+                placeholder="98765"
+                onblur="validateZipCode($(this).val())"
+                name="ZipCode"
+              >
+            </div>
+            <p
+              id="ZipErrorMessage"
+              class="help is-danger is-hidden"
+            >Zip code must be exactly 5 digits</p>
+          </div>
+
+          <div class="field">
+            <label
+              for="PhoneNumber"
+              class="label is-family-primary"
+            >Phone</label>
+            <div class="control ">
+              <input
+                required
+                class="input is-family-primary"
+                type="tel"
+                minlength="10"
+                maxlength="10"
+                id="PhoneNumber"
+                name="PhoneNumber"
+                onblur="validatePhone($(this).val())"
+                placeholder="5551231234"
+              >
+            </div>
+            <p
+              id="PhoneErrorMessage"
+              class="help is-danger is-hidden"
+            >Phone number is invalid</p>
+          </div>
+
+          <div class="field">
+            <label
+              for="Email"
+              class="label is-family-primary"
+            >Email</label>
+            <div class="control ">
+              <input
+                required
+                class="input is-family-primary"
+                type="email"
+                id="Email"
+                name="Email"
+                onblur="validateEmail($(this).val())"
+                placeholder="john_doe@gmail.com"
+              >
+            </div>
+            <p
+              id="EmailErrorMessage"
+              class="help is-danger is-hidden"
+            >This email is invalid</p>
+          </div>
+
+          <div class="field is-grouped is-grouped-right">
+            <div class="control">
+              <input
+                id="SubmitButton"
+                type="submit"
+                class="button is-primary is-family-primary"
+              >
+            </div>
+          </div>
+
+        </form>
+
+        <article
+          class="message is-success pt-3 is-hidden"
+          id="SuccessMessage"
+        >
+          <div class="message-body ">
+            Thanks, your submission has been received.
+          </div>
+        </article>
+
+      </div>
+      <p class="is-size-7 is-family-primary pt-5">By submitting this form, you authorize VelaPoint, LLC, and/or its
+        affiliates to contact you
+        at the e-mail
+        address and
+        phone number provided (even if the number you provided is on a state or national Do Not Call registry). This
+        contact may
+        include providing you with insurance quotes, policy and benefit information, and/or marketing information. The
+        company
+        may contact you using live operators, auto-dialers, pre-recorded messages, text messages, and/or emails. You
+        acknowledge
+        that you are not required to consent to contact as a condition of receiving services and that you may revoke
+        consent at
+        any time.</p>
+    </section>
+
+    <script>
+      /*
+        Limits ZipCode entered to a length of 5
+      */
+      $('input[name="ZipCode"]').keypress(function () {
+        if (this.value.length >= 5) {
+          return false;
+        }
+      });
+    </script>
+    <!-- Jquery dependency -->
+    <script src="https://dataservices.velapoint.com/CDN/Scripts/jquery-2.2.3.min.js"></script>
+    <!-- Lead capture on submit javascript dependency -->
+    <script src="/js/lead-capture-form.js" />
+  </body>
+
+</html>
